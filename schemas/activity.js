@@ -21,22 +21,33 @@ const CategorySchema = new mongoose.Schema(
 );
 
 const ToolboxSchema = new mongoose.Schema({
-  kind: { type: String, enum: ["categoryToolbox", "flyoutToolbox"], required: true },
+  kind: {
+    type: String,
+    enum: ["categoryToolbox", "flyoutToolbox"],
+    required: true,
+  },
   contents: [CategorySchema],
+});
+
+const GridEntitySchema = new mongoose.Schema({
+  x: { type: Number, required: true },
+  y: { type: Number, required: true },
+  imgSrc: String,
+});
+
+const LevelSchema = new mongoose.Schema({
+  gridSize: { type: Number, default: 8 },
+  gridBgImg: String,
+  player: GridEntitySchema,
+  goals: [GridEntitySchema],
+  npcs: [GridEntitySchema],
+  blockers: [GridEntitySchema],
 });
 
 const ActivitySchema = new mongoose.Schema(
   {
     title: {
       type: String,
-      required: true,
-    },
-    startDateSchool: {
-      type: Date,
-      required: true,
-    },
-    startDateStudent: {
-      type: Date,
       required: true,
     },
     activityType: {
@@ -51,6 +62,10 @@ const ActivitySchema = new mongoose.Schema(
     },
     toolbox: {
       type: ToolboxSchema,
+      required: true,
+    },
+    levels: {
+      type: [LevelSchema],
       required: true,
     },
   },

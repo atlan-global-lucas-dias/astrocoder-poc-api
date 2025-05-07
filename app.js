@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const cors = require("cors");
 const { connectMongoDB } = require("./lib/mongoose");
@@ -12,6 +14,6 @@ app.use("/activity", ActivitiesRouter);
 
 connectMongoDB()
   .then(() => {
-    app.listen(3030, () => console.log("Running on port 3030"));
+    app.listen(process.env.PORT ?? 3030, () => console.log("Running on port " + process.env.PORT));
   })
   .catch((err) => console.error(err));
