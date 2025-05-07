@@ -42,6 +42,10 @@ const LevelSchema = new mongoose.Schema({
   goals: [GridEntitySchema],
   npcs: [GridEntitySchema],
   blockers: [GridEntitySchema],
+  toolbox: {
+    type: ToolboxSchema,
+    required: true,
+  },
 });
 
 const ActivitySchema = new mongoose.Schema(
@@ -59,10 +63,6 @@ const ActivitySchema = new mongoose.Schema(
       type: String,
       enum: ["bg-red-500", "bg-yellow-500", "bg-green-500", "bg-blue-500"],
       default: "bg-red-500",
-    },
-    toolbox: {
-      type: ToolboxSchema,
-      required: true,
     },
     levels: {
       type: [LevelSchema],
