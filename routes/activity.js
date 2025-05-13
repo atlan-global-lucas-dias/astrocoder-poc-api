@@ -1,6 +1,6 @@
 const express = require("express");
 const { Activity } = require("../schemas/activity");
-const { default: mongoose } = require("mongoose");
+const { default: mongoose, Types } = require("mongoose");
 
 const ActivitiesRouter = express.Router();
 
